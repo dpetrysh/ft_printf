@@ -49,7 +49,7 @@ void	use_prec(t_spec *sp, t_num *num)
 	int		i;
 
 	i = -1;
-	if (!sp->prec && !ft_strcmp(num->n, "0") && !(sp->type == 'o' && sp->hash))
+	if (!sp->prec && !ft_strcmp(num->n, "0") && !((sp->type == 'o' || sp->type == 'O') && sp->hash))
 	{
 		free(num->n);
 		num->n = ft_strdup("");

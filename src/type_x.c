@@ -32,6 +32,7 @@ void	type_x(void *p, t_spec *sp, int big)
 		else
 			nbr_struct(ft_itoa_base_uns((unsigned int)p, 16, big), &num);
 	}
+	use_prec(sp, &num);
 	make_hash_x(p, sp, &num);
 	put_together(sp, &num);
 	ft_putstr(num.n);

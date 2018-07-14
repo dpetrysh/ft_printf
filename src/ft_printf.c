@@ -9,7 +9,7 @@
 /*   Updated: 2018/03/01 12:16:36 by dpetrysh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <limits.h>
 #include "printf.h"
 #include <locale.h>
 
@@ -31,6 +31,7 @@ void	make_struct(t_spec *sp, int start)
 	sp->j = 0;
 	sp->z = 0;
 	sp->type = 0;
+	sp->other = 0;
 }
 
 void	print_spec(t_spec *sp)
@@ -57,7 +58,7 @@ void	main_job(void *p, t_spec *sp)
 {
 	if (sp->type == '%')
 		type_pers(sp);
-	if (sp->type == 's')
+	if (sp->type == 's' || sp->type == 'S')
 		type_s(p, sp);
 	if (sp->type == 'p')
 		type_p(p, sp);
@@ -89,12 +90,12 @@ int	ft_printf(const char *format, ...)
 	make_struct(&sp, 1);
 	while (format[++i] != '\0')
 	{
-		if (format[i] == '%' && format[i + 1] != '%')
+		if (format[i] == '%' && format[i + 1] != '%' && detect_type((char *)format + i))
 		{
 			if ((s = ft_strsub(format, i, detect_type((char *)format + i) + 1)))
 				i += ft_strlen(s) - 1;
-			make_specific(&s, &sp);
-			p = va_arg(ap, void *);
+			if (make_specific(&s, &sp))
+				p = va_arg(ap, void *);
 			main_job(p, &sp);
 		}
 		else
@@ -127,13 +128,17 @@ int		detect_type(char *str)
 	int	i;
 
 	i = 1;
-	while (str[i] && !is_type(str[i]) && str[i] != '%')
+	while (str[i] && !is_type(str[i]) && str[i] != '%' && is_known(str[i]))
 		i++;
+	if (str[i] == '\0')
+		return (0);
 	return (i);
 }
 
-void	make_specific(char **str, t_spec *sp)
+int		make_specific(char **str, t_spec *sp)
 {
+	t_num	num;
+
 	make_flag(*str, sp);
 	make_length(*str, sp);
 	make_width(*str, sp);
@@ -141,7 +146,42 @@ void	make_specific(char **str, t_spec *sp)
 	make_type(*str, sp);
 	free(*str);
 	*str = NULL;
+	if (sp->type)
+		return (1);
+	else
+	{
+		make_tnum(&num);
+		put_char_simp(sp, &num, (char)sp->other);
+		return (0);
+	}
 }
+/*
+int		main(void)
+{
+	char* l = setlocale(LC_ALL, "");
+	ft_printf("%.5C", 0);
+	// ft_printf("%.5c", 0);
+	// if (l == NULL) 
+	// {
+	// printf("Locale not set\n");
+	// }
+	// else
+	// {
+	// printf("Locale set to %s\n", l);
+	// }
+	// printf("%d", printf("%ls", L"ᤗan"));
+	// printf("%-14ls\n", L"ᤗanmᤃᤃ");
+	// ft_printf("%8ls\n", L"b-b-b");
+	// printf("AAA%C\n", L'狼');
+	// printf("MB_CUR_MAX=%d\n", MB_CUR_MAX);
+	// ft_printf("%7.7s\n", "Hello");
+	// printf("%d\n", ft_wstrlen("ᤃ"));
+	// printf("%-5.2s\n", "abcd");
+	return (0);
+}
+
+*/
+
 
 /*
 int		detect_pers(char *str)
@@ -154,48 +194,6 @@ int		detect_pers(char *str)
 	return (i);
 }
 */
-
-
-int		main(void)
-{
-	int i;
-	
-	printf("%p\n", &i);
-	ft_printf("%s", &i);
-	// ft_printf("%-5c", 42);
-	// ft_printf("%+ d", 42);
-	// t_num num;
-	// t_spec sp;
-	// make_struct(&sp, 0);
-	// nbr_struct(atoi_base_i(123, 10, 0), &num);
-	// sp.plus = 1;
-	// //sp.zero = 1;
-	// sp.width = 5;
-	// //sp.minus = 1;
-	// sp.prec = 3;
-	// precise_string(&str, &sp);
-	// put_together(&sp, &num);
-	// printf("num=%s\n", num.n);
-	// printf("num_size=%d\n", num.s);
-	// char* l = setlocale(LC_ALL, "");
-	// if (l == NULL) 
-	// {
-	// printf("Locale not set\n");
-	// }
-	// else
-	// {
-	// printf("Locale set to %s\n", l);
-	// }  // ᤗᤃᤃ
-	// printf("%d", printf("%ls", L"ᤗan"));
-	// printf("%-14ls\n", L"ᤗanmᤃᤃ");
-	// ft_printf("%8ls\n", L"b-b-b");
-	// printf("AAA%C\n", L'狼');
-	// printf("MB_CUR_MAX=%d\n", MB_CUR_MAX);
-	// ft_printf("%7.7s\n", "Hello");
-	// printf("%d\n", ft_wstrlen("ᤃ"));
-	// printf("%-5.2s\n", "abcd");
-	return (0);
-}
 
 
 

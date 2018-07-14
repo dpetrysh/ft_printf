@@ -25,9 +25,9 @@
 
 typedef	struct	s_num
 {
-	int		m; // minus
-	int		s; // number of digits
-	char	*n; // actually the number
+	int		m;
+	int		s;
+	char	*n;
 }				t_num;
 
 typedef	struct	s_str1
@@ -59,6 +59,7 @@ typedef struct	s_spec
 	int			j;
 	int			z;
 	int			type;
+	int			other;
 }				t_spec;
 
 
@@ -67,15 +68,17 @@ int	ft_printf(const char *format, ...);
 
 //printf.c
 int		detect_type(char *str);
-void	make_specific(char **str, t_spec *sp);
+int		make_specific(char **str, t_spec *sp);
 void	make_struct(t_spec *sp, int start);
 int		ft_printf(const char *format, ...);
 void	main_job(void *p, t_spec *sp);
+
 
 int		is_flag(char c);
 int		is_length(char c);
 int		is_type(char c);
 int		is_unsigned_type(char c);
+int		is_known(char c);
 
 void	make_flag(char *str, t_spec *sp);
 void	make_length(char *str, t_spec *sp);
@@ -127,11 +130,13 @@ void	make_hash_o(t_spec *sp, t_num *num);
 void	make_hash_x(void *p, t_spec *sp, t_num *num);
 void	precise_string(t_num *num, t_spec *sp);
 void	precise_wstr(w_str *w, t_spec *sp);
+void	make_wstr(void *p, t_spec *sp);
+void	use_width_wstr(w_str *w, t_spec *sp);
 
 int		get_wlen(wchar_t *str);
 int		count_bytes(wchar_t c);
 int		put_wchar(wchar_t c);
-void	put_wstr(wchar_t *wstr);
+void	put_wstr(t_spec *sp, wchar_t *wstr);
 
 int		get_rank(long long n, int base);
 int		get_rank_uns(unsigned long long n, int base);

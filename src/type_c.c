@@ -20,36 +20,14 @@ void	type_c(void *p, t_spec *sp)
 	c = (char)p;
 	make_tnum(&num);
 	if (!p || c == 0)
-	{
 		put_chzero(sp, &num);
-	}
-	else
-	{															//
+	else if (sp->type == 'c' && !sp->l)
+	{
 		put_char_simp(sp, &num, c);
-	}															//
-														// get_wlen((wchar_t *)p);
-														// i = sp->res;
-}
-
-void	put_chzero(t_spec *sp, t_num *num)
-{
-	num->s = 1;
-
-	num->n = ft_strdup("");
-	put_together(sp, num);
-	if (sp->minus)
-	{
-		ft_putchar(0);
-		ft_putstr(num->n);
-		sp->res += ft_strlen(num->n) + 1;
-		free(num->n);
 	}
-	else
+	else if (sp->type == 'C' || (sp->type == 'c' && sp->l))
 	{
-		ft_putstr(num->n);
-		ft_putchar(0);
-		sp->res += ft_strlen(num->n) + 1;
-		free(num->n);
+		sp->res += put_wchar((wchar_t)p);
 	}
 }
 
@@ -127,3 +105,31 @@ int		put_wchar(wchar_t c)
 	}
 	return (len);
 }
+
+void	put_chzero(t_spec *sp, t_num *num)
+{
+	num->s = 1;
+
+	num->n = ft_strdup("");
+	// printf("here1=%s\n", num->n);
+	put_together(sp, num);
+	// printf("here2=%s\n", num->n);
+
+	if (sp->minus)
+	{
+		ft_putchar(0);
+		ft_putstr(num->n);
+		sp->res += ft_strlen(num->n) + 1;
+		free(num->n);
+	}
+	else
+	{
+		ft_putstr(num->n);
+		ft_putchar(0);
+		sp->res += ft_strlen(num->n) + 1;
+		free(num->n);
+	}
+	
+}
+
+

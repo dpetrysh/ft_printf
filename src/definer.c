@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "printf.h"
+
 int		is_flag(char c)
 {
-	if (c == '-' || c == '+' || c == ' ' || c == '#' | c == '0')
+	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
 		return (1);
 	return (0);
 }
@@ -37,6 +39,13 @@ int		is_unsigned_type(char c)
 {
 	if (c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
 		c == 'u' || c == 'U')
+		return (1);
+	return (0);
+}
+
+int		is_known(char c)
+{
+	if (is_flag(c) || is_length(c) || is_type(c) || is_unsigned_type(c) || ft_isdigit(c) || c == '.')
 		return (1);
 	return (0);
 }

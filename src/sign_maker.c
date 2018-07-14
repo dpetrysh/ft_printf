@@ -16,12 +16,10 @@ void	make_sign(t_spec *sp, t_num *num)
 {
 	if (num->m)
 		make_minus(num);
-	else if (sp->plus)
+	else if (sp->plus && sp->type != 'c' && sp->type != 'C' && sp->type != 'p' && sp->type != 'x' && sp->type != 'X')
 		make_plus(num);
-	else if (sp->space && sp->type != '%' && sp->type != 'c')
+	else if (sp->space && sp->type != '%' && sp->type != 'c' && sp->type != 'C' &&sp->type && sp->type != 'p' && sp->type != 'x' && sp->type != 'X')
 		make_inv_plus(num);
-	//else if (sp->zero && !sp->plus && !sp->minus && sp->prec == -1)
-		//make_more_zero(num);
 }
 
 void	make_minus(t_num *num)

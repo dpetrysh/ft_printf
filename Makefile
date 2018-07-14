@@ -42,6 +42,7 @@ _SRC = ft_printf.c \
 		type_u.c \
 		type_s.c \
 		type_c.c \
+		type_p.c \
 		type_pers.c \
 		prec_user.c \
 		sign_maker.c \

@@ -20,20 +20,20 @@ void	type_o(void *p, t_spec *sp, int big)
 	if (sp->type == 'o')
 	{
 		if (sp->l || sp->j)
-			nbr_struct(ft_itoa_base_uns((long)p, 8, big), &num);
+			nbr_struct(ft_itoa_base_uns((unsigned long)p, 8, big), &num);
 		else if (sp->ll)
-			nbr_struct(ft_itoa_base_uns((long long)p, 8, big), &num);
+			nbr_struct(ft_itoa_base_uns((unsigned long long)p, 8, big), &num);
 		else if (sp->h)
-			nbr_struct(ft_itoa_base_uns((short)p, 8, big), &num);
+			nbr_struct(ft_itoa_base_uns((unsigned short)p, 8, big), &num);
 		else if (sp->hh)
-			nbr_struct(ft_itoa_base_uns((char)p, 8, big), &num);
+			nbr_struct(ft_itoa_base_uns((unsigned char)p, 8, big), &num);
 		else if (sp->z)
 			nbr_struct(ft_itoa_base_uns((size_t)p, 8, big), &num);
 		else
-			nbr_struct(ft_itoa_base_uns((int)p, 8, big), &num);
+			nbr_struct(ft_itoa_base_uns((unsigned int)p, 8, big), &num);
 	}
 	else if (sp->type == 'O')
-		nbr_struct(ft_itoa_base_uns((long)p, 8, big), &num);
+		nbr_struct(ft_itoa_base_uns((unsigned long)p, 8, big), &num);
 	make_hash_o(sp, &num);
 	put_together(sp, &num);
 	ft_putstr(num.n);

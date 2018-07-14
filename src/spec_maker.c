@@ -83,7 +83,10 @@ void	make_precision(char *str, t_spec *sp)
 
 void	make_type(char *str, t_spec *sp)
 {
-	sp->type = (int)str[ft_strlen(str) - 1];
+	if (is_type(str[ft_strlen(str) - 1]))
+		sp->type = (int)str[ft_strlen(str) - 1];
+	else
+		sp->other = (int)str[ft_strlen(str) - 1];
 }
 
 
