@@ -17,7 +17,7 @@ void	type_c(void *p, t_spec *sp)
 	int		c;
 	t_num	num;
 
-	c = (char)p;
+	c = (unsigned char)p;
 	make_tnum(&num);
 	if (!p || c == 0)
 		put_chzero(sp, &num);
