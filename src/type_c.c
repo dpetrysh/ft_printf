@@ -85,18 +85,18 @@ int		put_wchar(wchar_t c)
 	len = count_bytes(c);
 	if (len == 1 && MB_CUR_MAX == 1)
 		ft_putchar(c);
-	else if (len == 2 && MB_CUR_MAX >= 2)
+	else if (len == 2 && MB_CUR_MAX == 2)
 	{
 		ft_putchar((c >> 6) | 0xC0);
 		ft_putchar((c & 0x3F) | 0x80);
 	}
-	else if (len == 3 && MB_CUR_MAX >= 3)
+	else if (len == 3 && MB_CUR_MAX == 3)
 	{
 		ft_putchar((c >> 12) | 0xE0);
 		ft_putchar(((c >> 6) & 0x3F) | 0x80);
 		ft_putchar((c & 0x3F) | 0x80);
 	}
-	else if (len == 4 && MB_CUR_MAX >= 4)
+	else if (len == 4 && MB_CUR_MAX == 4)
 	{
 		ft_putchar((c >> 18) | 0xF0);
 		ft_putchar(((c >> 12) & 0x3F) | 0x80);
