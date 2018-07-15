@@ -159,7 +159,7 @@ int		make_specific(char **str, t_spec *sp)
 int		main(void)
 {
 	char* l = setlocale(LC_ALL, "");
-	ft_printf("%.5C", 0);
+	printf("%C\n%C\n", L'�', L'�');
 	// ft_printf("%.5c", 0);
 	// if (l == NULL) 
 	// {
@@ -179,8 +179,8 @@ int		main(void)
 	// printf("%-5.2s\n", "abcd");
 	return (0);
 }
-
 */
+
 
 
 /*

@@ -17,7 +17,7 @@ void	type_c(void *p, t_spec *sp)
 	int		c;
 	t_num	num;
 
-	c = (int)p;
+	c = (char)p;
 	make_tnum(&num);
 	if (!p || c == 0)
 		put_chzero(sp, &num);
@@ -25,10 +25,12 @@ void	type_c(void *p, t_spec *sp)
 	{
 		put_char_simp(sp, &num, c);
 	}
-	else if (sp->type == 'C' || (sp->type == 'c' && sp->l))
+	else if (sp->type == 'C' || (sp->type == 'c' && sp->l) && MB_CUR_MAX != 1)
 	{
 		sp->res += put_wchar((wchar_t)p);
 	}
+	else
+		put_char_simp(sp, &num, c);
 }
 
 void	put_char_simp(t_spec *sp, t_num *num, char c)
@@ -83,20 +85,20 @@ int		put_wchar(wchar_t c)
 	int len;
 
 	len = count_bytes(c);
-	if (len == 1 && MB_CUR_MAX == 1)
+	if (len == 1)
 		ft_putchar(c);
-	else if (len == 2 && MB_CUR_MAX >= 1)
+	else if (len == 2)
 	{
 		ft_putchar((c >> 6) | 0xC0);
 		ft_putchar((c & 0x3F) | 0x80);
 	}
-	else if (len == 3 && MB_CUR_MAX >= 2)
+	else if (len == 3)
 	{
 		ft_putchar((c >> 12) | 0xE0);
 		ft_putchar(((c >> 6) & 0x3F) | 0x80);
 		ft_putchar((c & 0x3F) | 0x80);
 	}
-	else if (len == 4 && MB_CUR_MAX >= 3)
+	else if (len == 4)
 	{
 		ft_putchar((c >> 18) | 0xF0);
 		ft_putchar(((c >> 12) & 0x3F) | 0x80);
