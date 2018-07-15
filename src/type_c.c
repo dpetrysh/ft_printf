@@ -25,7 +25,7 @@ void	type_c(void *p, t_spec *sp)
 	{
 		put_char_simp(sp, &num, c);
 	}
-	else if (sp->type == 'C' || (sp->type == 'c' && sp->l) && MB_CUR_MAX != 1)
+	else if ((sp->type == 'C' || (sp->type == 'c' && sp->l)) && MB_CUR_MAX > 1)
 	{
 		sp->res += put_wchar((wchar_t)p);
 	}
