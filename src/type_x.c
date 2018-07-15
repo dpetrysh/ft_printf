@@ -35,7 +35,8 @@ void	type_x(void *p, t_spec *sp, int big)
 	use_prec(sp, &num);
 	make_hash_x(p, sp, &num);
 	put_together(sp, &num);
-	ft_putstr(num.n);
+	write(1, num.n, ft_strlen(num.n));
+	// ft_putstr(num.n);
 	sp->res += num.s;
 	free(num.n);
 }

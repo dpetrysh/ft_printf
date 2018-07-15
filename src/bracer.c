@@ -14,11 +14,9 @@
 
 void	put_together(t_spec *sp, t_num *num)
 {
-
 	if (sp->prec != -1 && sp->type != 'c' && sp->type && sp->type != 'C')
 	{
 		use_prec(sp, num);
-		// printf("put1=%s\n", num->n);
 		if (sp->width > num->s)
 		{
 			if (sp->minus)
@@ -29,14 +27,12 @@ void	put_together(t_spec *sp, t_num *num)
 	}
 	else
 	{
-		// printf("HERE===%s\n", num->n);
 		if (sp->width > num->s)
 		{
 			if (sp->minus)
 				noprec_minus_in(sp, num);
 			else
 				noprec_minus_off(sp, num);
-			// printf("brace1=%s\n", num->n);
 		}
 		else if (!is_unsigned_type(sp->type))
 			make_sign(sp, num);
@@ -53,10 +49,7 @@ void	noprec_minus_in(t_spec *sp, t_num *num)
 void	noprec_minus_off(t_spec *sp, t_num *num)
 {
 	if (sp->zero && sp->type != 'C')
-	{
 		make_zero(sp, num);
-		// printf("brace1=%s\n", num->n);
-	}
 	else
 	{
 		make_sign(sp, num);

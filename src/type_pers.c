@@ -20,7 +20,8 @@ void	type_pers(t_spec *sp)
 	num.s = 1;
 	num.n = ft_strdup("%");
 	put_together(sp, &num);
-	ft_putstr(num.n);
+	write(1, num.n, ft_strlen(num.n));
+	// ft_putstr(num.n);
 	sp->res += num.s;
 	free(num.n);
 }

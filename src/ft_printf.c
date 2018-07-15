@@ -34,26 +34,6 @@ void	make_struct(t_spec *sp, int start)
 	sp->other = 0;
 }
 
-void	print_spec(t_spec *sp)
-{
-	printf("minus=%d\n", sp->minus);
-	printf("plus=%d\n", sp->plus);
-	printf("space=%d\n", sp->space);
-	printf("hash=%d\n", sp->hash);
-	printf("zero=%d\n", sp->zero);
-
-	printf("width=%d\n", sp->width);
-	printf("prec=%d\n", sp->prec);
-	printf("l=%d\n", sp->l);
-	printf("ll=%d\n", sp->ll);
-	printf("h=%d\n", sp->h);
-	printf("hh=%d\n", sp->hh);
-
-	printf("j=%d\n", sp->j);
-	printf("z=%d\n", sp->z);
-	printf("type=%d\n", sp->type);
-}
-
 void	main_job(void *p, t_spec *sp)
 {
 	if (sp->type == '%')
@@ -155,46 +135,3 @@ int		make_specific(char **str, t_spec *sp)
 		return (0);
 	}
 }
-/*
-int		main(void)
-{
-	char* l = setlocale(LC_ALL, "");
-	ft_printf("%C", L'狼');
-	// ft_printf("%.5c", 0);
-	// if (l == NULL) 
-	// {
-	// printf("Locale not set\n");
-	// }
-	// else
-	// {
-	// printf("Locale set to %s\n", l);
-	// }
-	// printf("%d", printf("%ls", L"ᤗan"));
-	// printf("%-14ls\n", L"ᤗanmᤃᤃ");
-	// ft_printf("%8ls\n", L"b-b-b");
-	// printf("AAA%C\n", L'狼');
-	// printf("MB_CUR_MAX=%d\n", MB_CUR_MAX);
-	// ft_printf("%7.7s\n", "Hello");
-	// printf("%d\n", ft_wstrlen("ᤃ"));
-	// printf("%-5.2s\n", "abcd");
-	return (0);
-}
-*/
-
-
-
-/*
-int		detect_pers(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] && str[i] != '%')
-		i++;
-	return (i);
-}
-*/
-
-
-
-

@@ -36,7 +36,8 @@ void	type_o(void *p, t_spec *sp, int big)
 		nbr_struct(ft_itoa_base_uns((unsigned long)p, 8, big), &num);
 	make_hash_o(sp, &num);
 	put_together(sp, &num);
-	ft_putstr(num.n);
+	write(1, num.n, ft_strlen(num.n));
+	// ft_putstr(num.n);
 	sp->res += num.s;
 	free(num.n);
 }

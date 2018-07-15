@@ -143,7 +143,8 @@ void	put_str_simp(t_spec *sp, t_num *num)
 		else
 			minus_flag_off(sp, num);
 	}
-	ft_putstr(num->n);
+	write(1, num->n, ft_strlen(num->n));
+	// ft_putstr(num->n);
 	sp->res += ft_strlen(num->n);
 	free(num->n);
 }
