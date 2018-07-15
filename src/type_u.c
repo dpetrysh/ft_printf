@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "printf.h"
 
 void	type_u(void *p, t_spec *sp, int big)
 {
-	t_num num;
+	t_num	num;
 
 	make_tnum(&num);
 	if (sp->type == 'u')
@@ -37,7 +36,6 @@ void	type_u(void *p, t_spec *sp, int big)
 		nbr_struct(ft_itoa_base_uns((unsigned long)p, 10, big), &num);
 	put_together(sp, &num);
 	write(1, num.n, ft_strlen(num.n));
-	// ft_putstr(num.n);
 	sp->res += num.s;
 	free(num.n);
 }

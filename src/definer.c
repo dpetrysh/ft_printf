@@ -45,12 +45,8 @@ int		is_unsigned_type(char c)
 
 int		is_known(char c)
 {
-	if (is_flag(c) || is_length(c) || is_type(c) || is_unsigned_type(c) || ft_isdigit(c) || c == '.')
+	if (is_flag(c) || is_length(c) || is_type(c) || is_unsigned_type(c) ||
+		ft_isdigit(c) || c == '.')
 		return (1);
 	return (0);
 }
-
-
-
-
-

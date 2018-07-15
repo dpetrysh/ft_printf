@@ -35,84 +35,22 @@ void	type_s(void *p, t_spec *sp)
 	}
 }
 
-void	put_wstr(t_spec *sp, wchar_t *wstr)
+void	put_str_simp(t_spec *sp, t_num *num)
 {
-	int	i;
-
-	i = -1;
-	while (wstr[++i])
-		put_wchar(wstr[i]);
-	sp->res += get_wlen(wstr);
-}
-
-void	make_wstr(void *p, t_spec *sp)
-{
-	int		i;
-	wchar_t *wch;
-	w_str	w;
-
-	i = -1;
-	wch = (wchar_t *)p;
-	w.s = get_wlen(wch);
-	w.n = (wchar_t *)ft_memalloc(sizeof(wchar_t) * w.s + 1);
-	while (wch[++i])
-		w.n[i] = wch[i];
-	w.n[i] = '\0';
-	if (sp->prec != -1)
-		precise_wstr(&w, sp);
-	if (sp->width > w.s)
-		use_width_wstr(&w, sp);
-	else
-		put_wstr(sp, w.n);
-	free(w.n);
-}
-
-void	use_width_wstr(w_str *w, t_spec *sp)
-{
-	int		i;
-	char	*ch;
-
-	i = -1;
-	ch = (char *)ft_memalloc(sp->width - w->s + 1);
-	while (++i < sp->width - w->s)
+	if (sp->prec != -1 && sp->type != 'p')
+		precise_string(num, sp);
+	if (sp->width > num->s)
 	{
-		if (sp->zero)
-			ch[i] = '0';
+		if (sp->minus)
+			minus_flag_in(sp, num);
+		else if (sp->zero)
+			make_zero(sp, num);
 		else
-			ch[i] = ' ';
+			minus_flag_off(sp, num);
 	}
-	ch[i] = '\0';
-	if (sp->minus)
-	{
-		put_wstr(sp, w->n);
-		ft_putstr(ch);
-	}
-	else
-	{
-		ft_putstr(ch);
-		put_wstr(sp, w->n);
-	}
-	sp->res += ft_strlen(ch);
-	free(ch);
-}
-void	precise_wstr(w_str *w, t_spec *sp)
-{
-	int		i;
-	int		s;
-	wchar_t	*tmp;
-
-	i = 0;
-	s = 0;
-	tmp = w->n;
-	w->n = (wchar_t *)ft_memalloc(sizeof(wchar_t) * sp->prec + 1);
-	while ((s += count_bytes(tmp[i])) <= sp->prec && i < w->s)
-	{
-		w->n[i] = tmp[i];
-		i++;
-	}
-	w->n[i] = '\0';
-	w->s = get_wlen(w->n);
-	free(tmp);
+	write(1, num->n, ft_strlen(num->n));
+	sp->res += ft_strlen(num->n);
+	free(num->n);
 }
 
 void	precise_string(t_num *num, t_spec *sp)
@@ -130,22 +68,34 @@ void	precise_string(t_num *num, t_spec *sp)
 	free(tmp);
 }
 
-void	put_str_simp(t_spec *sp, t_num *num)
+void	put_wstr(t_spec *sp, wchar_t *wstr)
 {
-	if (sp->prec != -1 && sp->type != 'p')
-		precise_string(num, sp);
-	if (sp->width > num->s)
-	{
-		if (sp->minus)
-			minus_flag_in(sp, num);
-		else if (sp->zero)
-			make_zero(sp, num);
-		else
-			minus_flag_off(sp, num);
-	}
-	write(1, num->n, ft_strlen(num->n));
-	// ft_putstr(num->n);
-	sp->res += ft_strlen(num->n);
-	free(num->n);
+	int	i;
+
+	i = -1;
+	while (wstr[++i])
+		put_wchar(wstr[i]);
+	sp->res += get_wlen(wstr);
 }
 
+void	make_wstr(void *p, t_spec *sp)
+{
+	int		i;
+	wchar_t	*wch;
+	t_wstr	w;
+
+	i = -1;
+	wch = (wchar_t *)p;
+	w.s = get_wlen(wch);
+	w.n = (wchar_t *)ft_memalloc(sizeof(wchar_t) * w.s + 1);
+	while (wch[++i])
+		w.n[i] = wch[i];
+	w.n[i] = '\0';
+	if (sp->prec != -1)
+		precise_wstr(&w, sp);
+	if (sp->width > w.s)
+		use_width_wstr(&w, sp);
+	else
+		put_wstr(sp, w.n);
+	free(w.n);
+}

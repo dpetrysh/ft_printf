@@ -46,7 +46,8 @@ _SRC = ft_printf.c \
 		type_pers.c \
 		prec_user.c \
 		sign_maker.c \
-		bracer.c 
+		bracer.c \
+		wchar_maker.c
 
 SRC = $(_SRC:%.c=$(SRC_DIR)%.c)$
 OBJ = $(_SRC:%.c=%.o)$

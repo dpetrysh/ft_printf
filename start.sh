@@ -1,1 +1,0 @@
-gcc ./src/ft_printf.c ./src/definer.c ./src/spec_maker.c ./src/atoi_base.c ./src/atoi_base_uns.c ./src/type_p.c ./src/type_d.c ./src/type_o.c ./src/type_x.c ./src/type_u.c ./src/type_s.c ./src/type_c.c ./src/type_pers.c ./src/prec_user.c ./src/sign_maker.c ./src/bracer.c libft/libft.a -I ./libft/includes -g

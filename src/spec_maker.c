@@ -14,7 +14,7 @@
 
 void	make_flag(char *str, t_spec *sp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_strchr(str, '-'))
@@ -52,12 +52,13 @@ void	make_length(char *str, t_spec *sp)
 
 void	make_width(char *str, t_spec *sp)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) && str[i] != '0' && (!ft_isdigit(str[i - 1]) || str[i - 1] == '0') && str[i - 1] != '.')
+		if (ft_isdigit(str[i]) && str[i] != '0' &&
+			(!ft_isdigit(str[i - 1]) || str[i - 1] == '0') && str[i - 1] != '.')
 		{
 			sp->width = ft_atoi(str + i);
 			i = ft_strlen(str) - 2;
@@ -68,7 +69,7 @@ void	make_width(char *str, t_spec *sp)
 
 void	make_precision(char *str, t_spec *sp)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (str[i])
@@ -88,6 +89,3 @@ void	make_type(char *str, t_spec *sp)
 	else
 		sp->other = (int)str[ft_strlen(str) - 1];
 }
-
-
-

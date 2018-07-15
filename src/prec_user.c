@@ -19,9 +19,51 @@ void	make_tnum(t_num *num)
 	num->n = NULL;
 }
 
+int		make_specific(char **str, t_spec *sp)
+{
+	t_num	num;
+
+	make_flag(*str, sp);
+	make_length(*str, sp);
+	make_width(*str, sp);
+	make_precision(*str, sp);
+	make_type(*str, sp);
+	free(*str);
+	*str = NULL;
+	if (sp->type)
+		return (1);
+	else
+	{
+		make_tnum(&num);
+		put_char_simp(sp, &num, (char)sp->other);
+		return (0);
+	}
+}
+
+void	make_zero(t_spec *sp, t_num *num)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = -1;
+	j = 0;
+	tmp = num->n;
+	if ((sp->plus || num->m || sp->space))
+		sp->width--;
+	num->n = (char *)malloc(sizeof(char) * (sp->width + 1));
+	while (++i < (sp->width - num->s))
+		num->n[i] = '0';
+	while (i < sp->width)
+		num->n[i++] = tmp[j++];
+	num->n[i] = '\0';
+	make_sign(sp, num);
+	free(tmp);
+}
+
 void	nbr_struct(char *str, t_num *num)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[0] == '-')
@@ -49,7 +91,8 @@ void	use_prec(t_spec *sp, t_num *num)
 	int		i;
 
 	i = -1;
-	if (!sp->prec && !ft_strcmp(num->n, "0") && !((sp->type == 'o' || sp->type == 'O') && sp->hash))
+	if (!sp->prec && !ft_strcmp(num->n, "0") &&
+		!((sp->type == 'o' || sp->type == 'O') && sp->hash))
 	{
 		free(num->n);
 		num->n = ft_strdup("");
@@ -70,6 +113,3 @@ void	use_prec(t_spec *sp, t_num *num)
 	}
 	make_sign(sp, num);
 }
-
-
-

@@ -36,7 +36,6 @@ void	type_d(void *p, t_spec *sp, int big)
 		nbr_struct(ft_itoa_base((long)p, 10, big), &num);
 	put_together(sp, &num);
 	write(1, num.n, ft_strlen(num.n));
-	// ft_putstr(num.n);
 	sp->res += num.s;
 	free(num.n);
 }

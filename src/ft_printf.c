@@ -9,6 +9,7 @@
 /*   Updated: 2018/03/01 12:16:36 by dpetrysh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <limits.h>
 #include "printf.h"
 #include <locale.h>
@@ -57,7 +58,7 @@ void	main_job(void *p, t_spec *sp)
 	make_struct(sp, 0);
 }
 
-int	ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list ap;
 	void	*p;
@@ -70,7 +71,8 @@ int	ft_printf(const char *format, ...)
 	make_struct(&sp, 1);
 	while (format[++i] != '\0')
 	{
-		if (format[i] == '%' && format[i + 1] != '%' && detect_type((char *)format + i))
+		if (format[i] == '%' && format[i + 1] != '%' &&
+			detect_type((char *)format + i))
 		{
 			if ((s = ft_strsub(format, i, detect_type((char *)format + i) + 1)))
 				i += ft_strlen(s) - 1;
@@ -113,25 +115,4 @@ int		detect_type(char *str)
 	if (str[i] == '\0')
 		return (0);
 	return (i);
-}
-
-int		make_specific(char **str, t_spec *sp)
-{
-	t_num	num;
-
-	make_flag(*str, sp);
-	make_length(*str, sp);
-	make_width(*str, sp);
-	make_precision(*str, sp);
-	make_type(*str, sp);
-	free(*str);
-	*str = NULL;
-	if (sp->type)
-		return (1);
-	else
-	{
-		make_tnum(&num);
-		put_char_simp(sp, &num, (char)sp->other);
-		return (0);
-	}
 }

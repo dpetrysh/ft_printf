@@ -12,7 +12,6 @@
 
 #include "printf.h"
 
-
 void	add_char(char **s1, char c)
 {
 	char	*ch;
@@ -36,7 +35,7 @@ char	*str_add(char **s1, char *s2)
 	return (*s1);
 }
 
-char	get_chardig(int n, int big)		//big == 0 ---> small letters // big == 1 ---> big letters
+char	get_chardig(int n, int big)
 {
 	if (n > 9)
 	{
@@ -71,7 +70,7 @@ char	*ft_itoa_base(long long n, int base, int big)
 	char	*str;
 
 	rank = get_rank(n, base);
-	str = (char *)ft_memalloc(sizeof(char) * (rank + 1));   //ft_memalloc
+	str = (char *)ft_memalloc(sizeof(char) * (rank + 1));
 	if (n < 0)
 		str[0] = '-';
 	str[rank] = '\0';

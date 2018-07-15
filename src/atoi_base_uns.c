@@ -14,7 +14,7 @@
 
 int		get_rank_uns(unsigned long long n, int base)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while ((n = ABS(n / base)) != 0)
@@ -28,7 +28,7 @@ char	*ft_itoa_base_uns(unsigned long long n, int base, int big)
 	char	*str;
 
 	rank = get_rank_uns(n, base);
-	str = (char *)malloc(sizeof(char) * (rank + 1));   //ft_memalloc
+	str = (char *)malloc(sizeof(char) * (rank + 1));
 	str[rank] = '\0';
 	while (--rank != -1)
 	{

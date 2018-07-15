@@ -57,31 +57,10 @@ void	noprec_minus_off(t_spec *sp, t_num *num)
 	}
 }
 
-void	make_zero(t_spec *sp, t_num *num)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = -1;
-	j = 0;
-	tmp = num->n;
-	if ((sp->plus || num->m || sp->space))
-		sp->width--;
-	num->n = (char *)malloc(sizeof(char) * (sp->width + 1));
-	while (++i < (sp->width - num->s))
-		num->n[i] = '0';
-	while (i < sp->width)
-		num->n[i++] = tmp[j++];
-	num->n[i] = '\0';
-	make_sign(sp, num);
-	free(tmp);
-}
-
 void	minus_flag_in(t_spec *sp, t_num *num)
 {
-	int i;
-	char *tmp;
+	int		i;
+	char	*tmp;
 
 	i = -1;
 	tmp = num->n;
@@ -111,7 +90,3 @@ void	minus_flag_off(t_spec *sp, t_num *num)
 	num->n[i] = '\0';
 	free(tmp);
 }
-
-
-
-
