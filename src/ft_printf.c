@@ -159,7 +159,7 @@ int		make_specific(char **str, t_spec *sp)
 int		main(void)
 {
 	char* l = setlocale(LC_ALL, "");
-	printf("%C\n%C\n", L'�', L'�');
+	ft_printf("%C", L'狼');
 	// ft_printf("%.5c", 0);
 	// if (l == NULL) 
 	// {
